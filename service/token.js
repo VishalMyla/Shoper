@@ -5,7 +5,7 @@ function setUser(id , user){
     id,
     ... user,
   }
-  return jwt.sign(payload,secrete_key)
+  return jwt.sign(payload,secrete_key, { expiresIn: "1d" })
 }
 function getUser(token){
   return jwt.verify( token , secrete_key)

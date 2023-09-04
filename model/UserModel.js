@@ -29,10 +29,10 @@ var UserSchema = new mongoose.Schema(
       type:String,
       required:true,
     },
-    // cart: {
-    //     type: Array,
-    //     default: []
-    // },
+    cart: {
+        type: Array,
+        default: []
+    },
     address: {
       type: String,
     },
@@ -40,8 +40,22 @@ var UserSchema = new mongoose.Schema(
       type:String,
       enum: ["Admin", "User"],
       required: true
-    }
+    },
+    refreshToken : {
+      type:String
+    },
+    isBlocked: {
+      type: Boolean,
+      default:false
+    },
+    wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }],
+ 
+   
   }
+  ,
+  {
+    timestamps: true
+    }
 )
 UserSchema.pre("save", async function(next) {
   if (!this.isModified("password")) {
